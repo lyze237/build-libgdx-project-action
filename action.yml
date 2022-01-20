@@ -1,8 +1,8 @@
 name: "Build libGDX Project"
 description: "This action provides a simple way to build, test and package your libgdx game."
 inputs:
-  build-gwt:
-    description: 'Builds the gwt project'
+  build-html:
+    description: 'Builds the html project'
     required: false
     default: 'false'
   build-desktop:
@@ -39,3 +39,8 @@ runs:
     - run: $GITHUB_ACTION_PATH/runGradleTask.sh desktop:dist
       if: ${{ inputs.build-desktop == 'true' }}
       shell: bash
+
+    - run: $GITHUB_ACTION_PATH/runGradleTask.sh html:dist
+      if: ${{ inputs.build-html == 'true' }}
+      shell: bash
+
