@@ -29,10 +29,6 @@ runs:
         distribution: ${{ inputs.java-distribution }}
         java-version: ${{ inputs.java-version }}
         
-    - run: $GITHUB_ACTION_PATH/runGradleTask.sh
+    - run: $GITHUB_ACTION_PATH/runGradleTask.sh lwjgl3:run
       if: ${{ inputs.build-lwjgl3 == 'true' }}
-      args:
-        - 'lwjgl3:run'
       shell: bash
-      
-  
