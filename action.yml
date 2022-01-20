@@ -32,6 +32,10 @@ runs:
     - run: chmod +x $GITHUB_ACTION_PATH/runGradleTask.sh
       shell: bash
 
-    - run: $GITHUB_ACTION_PATH/runGradleTask.sh lwjgl3:run
+    - run: $GITHUB_ACTION_PATH/runGradleTask.sh lwjgl3:jar
       if: ${{ inputs.build-lwjgl3 == 'true' }}
+      shell: bash
+      
+    - run: $GITHUB_ACTION_PATH/runGradleTask.sh desktop:dist
+      if: ${{ inputs.build-desktop == 'true' }}
       shell: bash
