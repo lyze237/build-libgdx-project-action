@@ -1,0 +1,38 @@
+name: "Build libGDX Project"
+description: "This action provides a simple way to build, test and package your libgdx game."
+inputs:
+  build-gwt:
+    description: 'Builds the gwt project'
+    required: false
+    default: 'false'
+  build-desktop:
+    description: 'Builds the desktop project'
+    required: false
+    default: 'false'
+  build-lwjgl3:
+    description: 'Builds the lwjgl3 project'
+    required: false
+    default: 'false'
+  java-version:
+    description: 'The java version to use to build the project'
+    required: false
+    default: '8'
+  java-distribution:
+    description: 'The java distribution to use to build the project'
+    required: false
+    default: 'adopt-hotspot'
+runs:
+  using: "composite"
+  steps:
+    - uses: actions/setup-java@v2
+      with:
+        distribution: ${{ inputs.java-distribution }}
+        java-version: ${{ inputs.java-version }}
+        
+    - run: $GITHUB_ACTION_PATH/runGradleTask.sh
+      if: ${{ inputs.build-lwjgl3 == 'true' }}
+      args:
+        - 'lwjgl3:run'
+      shell: bash
+      
+  
